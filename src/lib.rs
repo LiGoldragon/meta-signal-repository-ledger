@@ -3,22 +3,7 @@
 use nota_codec::{NotaEnum, NotaRecord, NotaTransparent};
 use rkyv::{Archive, Deserialize as RkyvDeserialize, Serialize as RkyvSerialize};
 use signal_core::signal_channel;
-pub use signal_repository_ledger::{RepositoryName, RepositoryRegistration};
-
-#[derive(
-    Archive, RkyvSerialize, RkyvDeserialize, NotaTransparent, Debug, Clone, PartialEq, Eq, Hash,
-)]
-pub struct RepositoryLedgerPath(String);
-
-impl RepositoryLedgerPath {
-    pub fn new(value: impl Into<String>) -> Self {
-        Self(value.into())
-    }
-
-    pub fn as_str(&self) -> &str {
-        &self.0
-    }
-}
+pub use signal_repository_ledger::{RepositoryLedgerPath, RepositoryName, RepositoryRegistration};
 
 #[derive(
     Archive, RkyvSerialize, RkyvDeserialize, NotaTransparent, Debug, Clone, PartialEq, Eq, Hash,
