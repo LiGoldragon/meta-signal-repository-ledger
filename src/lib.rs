@@ -2,7 +2,7 @@
 
 use nota_codec::{NotaEnum, NotaRecord, NotaTransparent};
 use rkyv::{Archive, Deserialize as RkyvDeserialize, Serialize as RkyvSerialize};
-use signal_core::signal_channel;
+use signal_frame::signal_channel;
 pub use signal_repository_ledger::{FilesystemPath, Name, Registration};
 
 #[derive(
@@ -61,16 +61,6 @@ pub struct MirrorPolicySet {
 #[derive(
     Archive, RkyvSerialize, RkyvDeserialize, NotaEnum, Debug, Clone, Copy, PartialEq, Eq, Hash,
 )]
-pub enum OperationKind {
-    Registration,
-    Retirement,
-    SpoolDirectoryPolicy,
-    MirrorPolicy,
-}
-
-#[derive(
-    Archive, RkyvSerialize, RkyvDeserialize, NotaEnum, Debug, Clone, Copy, PartialEq, Eq, Hash,
-)]
 pub enum UnimplementedReason {
     StoreUnavailable,
     MirrorDispatchNotBuilt,
@@ -85,35 +75,25 @@ pub struct RequestUnimplemented {
 
 signal_channel! {
     channel Owner {
-        request Request {
-            Mutate Registration(Registration),
-            Retract Retirement(Retirement),
-            Mutate SpoolDirectoryPolicy(SpoolDirectoryPolicy),
-            Mutate MirrorPolicy(MirrorPolicy),
-        }
-        reply Reply {
-            Registered(Registered),
-            Retired(Retired),
-            SpoolDirectoryPolicySet(SpoolDirectoryPolicySet),
-            MirrorPolicySet(MirrorPolicySet),
-            RequestUnimplemented(RequestUnimplemented),
-        }
+        operation Register(Registration),
+        operation Retire(Retirement),
+        operation SetSpoolDirectory(SpoolDirectoryPolicy),
+        operation SetMirror(MirrorPolicy),
+    }
+    reply Reply {
+        Registered(Registered),
+        Retired(Retired),
+        SpoolDirectoryPolicySet(SpoolDirectoryPolicySet),
+        MirrorPolicySet(MirrorPolicySet),
+        RequestUnimplemented(RequestUnimplemented),
     }
 }
 
-pub type Frame = OwnerFrame;
-pub type FrameBody = OwnerFrameBody;
-pub type ChannelRequest = OwnerChannelRequest;
-pub type ChannelReply = OwnerChannelReply;
-pub type RequestBuilder = OwnerRequestBuilder;
+pub type ChannelRequest = signal_frame::Request<Operation>;
+pub type ChannelReply = signal_frame::Reply<Reply>;
 
-impl Request {
+impl Operation {
     pub fn operation_kind(&self) -> OperationKind {
-        match self {
-            Self::Registration(_) => OperationKind::Registration,
-            Self::Retirement(_) => OperationKind::Retirement,
-            Self::SpoolDirectoryPolicy(_) => OperationKind::SpoolDirectoryPolicy,
-            Self::MirrorPolicy(_) => OperationKind::MirrorPolicy,
-        }
+        self.kind()
     }
 }
