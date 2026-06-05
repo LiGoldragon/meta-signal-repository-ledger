@@ -1,9 +1,9 @@
-use nota_codec::{Decoder, Encoder, NotaDecode, NotaEncode};
-use owner_signal_repository_ledger::{
+use meta_signal_repository_ledger::{
     ChannelRequest, FilesystemPath, Frame, FrameBody, MirrorPolicy, MirrorPolicySet, MirrorTarget,
     Operation, OperationKind, Registered, Registration, Reply, RequestUnimplemented, Retired,
     Retirement, SpoolDirectoryPolicy, SpoolDirectoryPolicySet, UnimplementedReason,
 };
+use nota_codec::{Decoder, Encoder, NotaDecode, NotaEncode};
 use signal_frame::{
     ExchangeIdentifier, ExchangeLane, LaneSequence, NonEmpty, Reply as FrameReply, RequestPayload,
     SessionEpoch, SubReply,
@@ -62,7 +62,7 @@ fn round_trip_reply(reply: Reply) -> Reply {
 }
 
 #[test]
-fn owner_operations_round_trip_through_signal_frame() {
+fn meta_operations_round_trip_through_signal_frame() {
     let register = Operation::Register(registration());
     assert_eq!(round_trip_operation(register.clone()), register);
 
@@ -85,7 +85,7 @@ fn owner_operations_round_trip_through_signal_frame() {
 }
 
 #[test]
-fn owner_replies_round_trip_through_signal_frame() {
+fn meta_replies_round_trip_through_signal_frame() {
     let registered = Reply::Registered(Registered {
         repository_name: name(),
     });
@@ -115,7 +115,7 @@ fn owner_replies_round_trip_through_signal_frame() {
 }
 
 #[test]
-fn owner_operations_encode_as_contract_local_nota_heads() {
+fn meta_operations_encode_as_contract_local_nota_heads() {
     let operation = Operation::Register(registration());
     let mut encoder = Encoder::new();
     operation

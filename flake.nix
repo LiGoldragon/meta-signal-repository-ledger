@@ -1,5 +1,5 @@
 {
-  description = "owner-signal-repository-ledger — owner authority repository ledger Signal contract";
+  description = "meta-signal-repository-ledger — meta authority repository ledger Signal contract";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -68,7 +68,7 @@
         };
 
         devShells.default = pkgs.mkShell {
-          name = "owner-signal-repository-ledger";
+          name = "meta-signal-repository-ledger";
           packages = [
             pkgs.jujutsu
             toolchain

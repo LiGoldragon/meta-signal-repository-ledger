@@ -1,14 +1,14 @@
 [package]
-name         = "owner-signal-repository-ledger"
+name         = "meta-signal-repository-ledger"
 version      = "0.1.0"
 edition      = "2024"
 rust-version = "1.85"
 license      = "MIT OR Apache-2.0"
-description  = "OwnerSignal contract for repository-ledger authority and configuration."
+description  = "MetaSignal contract for repository-ledger authority and configuration."
 publish      = false
 
 [lib]
-name = "owner_signal_repository_ledger"
+name = "meta_signal_repository_ledger"
 path = "src/lib.rs"
 
 [dependencies]

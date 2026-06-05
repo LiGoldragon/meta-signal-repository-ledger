@@ -1,4 +1,4 @@
-//! Owner Signal contract for repository-ledger.
+//! Meta Signal contract for repository-ledger.
 
 use nota_codec::{NotaEnum, NotaRecord, NotaTransparent};
 use rkyv::{Archive, Deserialize as RkyvDeserialize, Serialize as RkyvSerialize};
@@ -74,7 +74,7 @@ pub struct RequestUnimplemented {
 }
 
 signal_channel! {
-    channel Owner {
+    channel Meta {
         operation Register(Registration),
         operation Retire(Retirement),
         operation SetSpoolDirectory(SpoolDirectoryPolicy),

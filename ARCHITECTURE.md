@@ -1,11 +1,11 @@
-# owner-signal-repository-ledger Architecture
+# meta-signal-repository-ledger Architecture
 
-`owner-signal-repository-ledger` is the owner-only authority contract for
+`meta-signal-repository-ledger` is the meta-signal authority contract for
 `repository-ledger`.
 
 It exists because privileged repository policy must be separated by contract
 and socket from ordinary repository event/query traffic. The daemon has one
-owner listener actor for this contract and one ordinary listener actor for
+meta listener actor for this contract and one ordinary listener actor for
 `signal-repository-ledger`.
 
 ## Migration History — Three-Layer Model (2026-05-22)
@@ -13,7 +13,7 @@ owner listener actor for this contract and one ordinary listener actor for
 This contract uses the three-layer model affirmed 2026-05-20 per
 `primary/skills/component-triad.md`.
 
-Layer 1 owner contract operations are contract-local verbs on the
+Layer 1 meta-signal contract operations are contract-local verbs on the
 wire: `Register(Registration)`, `Retire(Retirement)`,
 `SetSpoolDirectory(SpoolDirectoryPolicy)`, and
 `SetMirror(MirrorPolicy)`. The contract depends on `signal-frame` for
@@ -34,7 +34,7 @@ component commands project to payloadless Sema labels via
 - Repository registration and retirement requests.
 - Spool directory policy.
 - Future mirror target policy records.
-- Owner-only request/reply variants declared with `signal_channel!`.
+- Meta-signal request/reply variants declared with `signal_channel!`.
 
 ## Does Not Own
 
@@ -44,9 +44,9 @@ component commands project to payloadless Sema labels via
 
 ## Constraints
 
-- Owner-only operations are contract-local verbs in
+- Meta-signal operations are contract-local verbs in
   verb form on the wire (Layer 1). The daemon owns the typed
   Component Commands (Layer 2) that project to Sema classes
   (Layer 3 — `Mutate` / `Retract` / `Assert`) for observation only.
 - This crate may reuse ordinary contract nouns when the same typed
-  noun crosses the owner boundary, but owner authority lives here.
+  noun crosses the meta boundary, but meta authority lives here.
