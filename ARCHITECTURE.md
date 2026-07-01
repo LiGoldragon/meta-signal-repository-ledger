@@ -8,6 +8,10 @@ and socket from ordinary repository event/query traffic. The daemon has one
 meta listener actor for this contract and one ordinary listener actor for
 `signal-repository-ledger`.
 
+## 0.5 · Direction
+
+`meta-signal-repository-ledger` is the meta authority contract for `repository-ledger`. It exists because privileged repository policy must be separated by contract and socket from ordinary repository event/query traffic: the daemon runs one meta listener actor for this contract and one ordinary listener actor for `signal-repository-ledger`. Meta-signal operations are contract-local verbs in verb form on the wire (Layer 1); the daemon owns the typed Component Commands (Layer 2) that project to Sema class labels (Layer 3) for observation only — no public `Mutate`/`Retract` wrapper appears on the wire.
+
 ## Migration History — Three-Layer Model (2026-05-22)
 
 This contract uses the three-layer model affirmed 2026-05-20 per
