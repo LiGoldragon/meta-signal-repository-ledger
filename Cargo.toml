@@ -18,8 +18,8 @@ nota-text = []
 [dependencies]
 nota                = { git = "https://github.com/LiGoldragon/nota.git", branch = "main" }
 rkyv                     = { version = "0.8", default-features = false, features = ["std", "bytecheck", "little_endian", "pointer_width_32", "unaligned"] }
-signal-frame             = { git = "https://github.com/LiGoldragon/signal-frame.git", branch = "main" }
-signal-repository-ledger = { git = "https://github.com/LiGoldragon/signal-repository-ledger", branch = "main" }
+signal-frame             = { git = "https://github.com/LiGoldragon/signal-frame.git", branch = "drop-next" }
+signal-repository-ledger = { git = "https://github.com/LiGoldragon/signal-repository-ledger", branch = "drop-next" }
 
 [lints.rust]
 unsafe_code = "forbid"
