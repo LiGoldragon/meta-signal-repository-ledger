@@ -1,8 +1,8 @@
 //! Meta Signal contract for repository-ledger.
 
 #[cfg(not(feature = "nota-text"))]
-use nota_next::{Block, NotaDecodeError};
-use nota_next::{NotaDecode, NotaEncode};
+use nota::{Block, NotaDecodeError};
+use nota::{NotaDecode, NotaEncode};
 use rkyv::{Archive, Deserialize as RkyvDeserialize, Serialize as RkyvSerialize};
 use signal_frame::signal_channel;
 pub use signal_repository_ledger::{FilesystemPath, Name, Registration};
