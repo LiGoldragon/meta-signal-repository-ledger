@@ -284,7 +284,7 @@ dependencies = [
 [[package]]
 name = "signal-repository-ledger"
 version = "0.1.0"
-source = "git+https://github.com/LiGoldragon/signal-repository-ledger?branch=drop-next#87495b7802b4a0225e4147352ac3fbe7bd633912"
+source = "git+https://github.com/LiGoldragon/signal-repository-ledger?branch=drop-next#2bc09662a0c62d98f92e5a8898e058c805c64834"
 dependencies = [
  "nota",
  "rkyv",
