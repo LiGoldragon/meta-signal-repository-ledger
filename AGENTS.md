@@ -1,7 +1,5 @@
 # meta-signal-repository-ledger — Agent Instructions
 
-Read `~/primary/AGENTS.md`, then this file.
-
 This repository is a pure MetaSignal contract crate. It declares the
 meta-signal repository-ledger vocabulary and contains no daemon, storage,
 actors, or runtime policy.
