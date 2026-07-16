@@ -6,3 +6,9 @@ actors, or runtime policy.
 
 Do not put ordinary peer queries here. Peer-callable repository reads and event
 submissions belong in `signal-repository-ledger`.
+
+## Protos estate status
+
+Stack: correct-new destination
+Status: active component contract, current checkout legacy-wired
+This checkout is not proof of correct-new adoption.
