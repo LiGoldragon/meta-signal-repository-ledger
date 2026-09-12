@@ -135,7 +135,7 @@ dependencies = [
 
 [[package]]
 name = "meta-signal-repository-ledger"
-version = "0.4.0"
+version = "0.5.0"
 dependencies = [
  "datom-codec",
  "ethos-zero",
@@ -286,8 +286,8 @@ checksum = "cf54715a573b99ac80df0bc206da022bcd442c974952c7b9720069370852e21f"
 
 [[package]]
 name = "signal"
-version = "4.0.0"
-source = "git+https://github.com/LiGoldragon/signal?rev=48ae17b485f2781e8ec1ca02a7fe04ad28a37f9f#48ae17b485f2781e8ec1ca02a7fe04ad28a37f9f"
+version = "5.0.0"
+source = "git+https://github.com/LiGoldragon/signal?rev=7bcb0949cdaa4501651ed519625eba48e283fac0#7bcb0949cdaa4501651ed519625eba48e283fac0"
 dependencies = [
  "datom-codec",
  "ethos-zero",
@@ -298,8 +298,8 @@ dependencies = [
 
 [[package]]
 name = "signal-repository-ledger"
-version = "0.4.0"
-source = "git+https://github.com/LiGoldragon/signal-repository-ledger?rev=0bceace871d526daba8eae962ceee2086fca6d8a#0bceace871d526daba8eae962ceee2086fca6d8a"
+version = "0.5.0"
+source = "git+https://github.com/LiGoldragon/signal-repository-ledger?rev=3c75a8b3f87eb4076ac4cea6745d95f26025decb#3c75a8b3f87eb4076ac4cea6745d95f26025decb"
 dependencies = [
  "datom-codec",
  "ethos-zero",
