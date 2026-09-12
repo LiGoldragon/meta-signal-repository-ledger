@@ -1,0 +1,38 @@
+; The meta repository-ledger Signal contract: authority and configuration only.
+;
+; Repository registration and retirement, the fallback spool directory policy,
+; and per-repository mirror policy. Event ingestion, storage and the read
+; queries live in the ordinary contract and the repository-ledger runtime.
+;
+; OperationKind's heads are the wire-facing names of the four operations, so no
+; declared type may spell one of them.
+Signal
+[ signal_repository_ledger:[ Name FilesystemPath Registration ] ]
+[ Register.Registration
+  Retire.Retirement
+  SetSpoolDirectory.SpoolDirectoryPolicy
+  SetMirror.MirrorPolicy ]
+[ Registered.Registered
+  Retired.Retired
+  SpoolDirectoryPolicySet.SpoolDirectoryPolicySet
+  MirrorPolicySet.MirrorPolicySet
+  RequestUnimplemented.RequestUnimplemented ]
+[ MirrorTarget.String
+
+  OperationKind.[ Register Retire SetSpoolDirectory SetMirror ]
+  UnimplementedReason.[ StoreUnavailable MirrorDispatchNotBuilt NotInPrototypeScope ]
+
+  RepositoryName.Name
+  SpoolDirectory.FilesystemPath
+  MirrorEnabled.Boolean
+
+  Retirement.{ RepositoryName }
+  SpoolDirectoryPolicy.{ SpoolDirectory }
+  MirrorPolicy.{ RepositoryName MirrorTarget MirrorEnabled }
+
+  Registered.{ RepositoryName }
+  Retired.{ RepositoryName }
+  SpoolDirectoryPolicySet.{ SpoolDirectory }
+  MirrorPolicySet.{ RepositoryName MirrorTarget }
+
+  RequestUnimplemented.{ OperationKind UnimplementedReason } ]

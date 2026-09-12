@@ -1,0 +1,14 @@
+; Canonical Datom text for the meta repository-ledger contract.
+; Every line was emitted by the codec that reads it back, and
+; tests/generated_contract.rs actualizes each one. The first four
+; lines are requests; the rest are replies.
+
+Register.{ repository-ledger RuntimeComponent }
+Retire.{ retired-component }
+SetSpoolDirectory.{ /var/spool/repository-ledger }
+SetMirror.{ repository-ledger git@github.com:LiGoldragon/repository-ledger.git True }
+Registered.{ repository-ledger }
+Retired.{ retired-component }
+SpoolDirectoryPolicySet.{ /var/spool/repository-ledger }
+MirrorPolicySet.{ repository-ledger git@github.com:LiGoldragon/repository-ledger.git }
+RequestUnimplemented.{ SetMirror MirrorDispatchNotBuilt }

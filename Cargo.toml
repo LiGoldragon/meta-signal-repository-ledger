@@ -1,27 +1,33 @@
 [package]
-name         = "meta-signal-repository-ledger"
-version      = "0.1.0"
-edition      = "2024"
-rust-version = "1.88"
-license      = "MIT OR Apache-2.0"
-description  = "MetaSignal contract for repository-ledger authority and configuration."
-publish      = false
+name = "meta-signal-repository-ledger"
+version = "0.3.0"
+edition = "2024"
+rust-version = "1.89"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/LiGoldragon/meta-signal-repository-ledger"
+description = "Meta Signal contract for repository-ledger authority and configuration."
+publish = false
+build = "build.rs"
 
 [lib]
 name = "meta_signal_repository_ledger"
 path = "src/lib.rs"
 
 [features]
-default   = []
-nota-text = []
+default = []
+datom = ["dep:datom-codec", "dep:protos", "signal/datom", "signal-repository-ledger/datom"]
 
 [dependencies]
-nota                = { git = "https://github.com/LiGoldragon/nota.git", branch = "main" }
-rkyv                     = { version = "0.8", default-features = false, features = ["std", "bytecheck", "little_endian", "pointer_width_32", "unaligned"] }
-signal-frame             = { git = "https://github.com/LiGoldragon/signal-frame.git", branch = "main" }
-signal-repository-ledger = { git = "https://github.com/LiGoldragon/signal-repository-ledger", branch = "main" }
+datom-codec = { git = "https://github.com/LiGoldragon/datom-codec", rev = "627db67f2655efd9f786864009955005fd8ab2ad", optional = true }
+protos = { git = "https://github.com/LiGoldragon/protos", rev = "171b21f65337983ab624b7b906397a4f1f92c5a3", optional = true }
+rkyv = { version = "0.8", default-features = false, features = ["std", "bytecheck", "little_endian", "pointer_width_32", "unaligned"] }
+signal = { git = "https://github.com/LiGoldragon/signal", rev = "8f9a0deb701cebbea518679548df4a795affc918", default-features = false }
+signal-repository-ledger = { git = "https://github.com/LiGoldragon/signal-repository-ledger", rev = "f47e196c0ff74299c42ebf6136a2e5c770be5ca9", default-features = false }
+
+[build-dependencies]
+ethos-zero = { git = "https://github.com/LiGoldragon/ethos-zero", rev = "de3d9928b156f2e1a92d060b7817af201abfdbef" }
 
 [lints.rust]
 unsafe_code = "forbid"
-unused      = { level = "warn", priority = -1 }
-dead_code   = "warn"
+unused = { level = "warn", priority = -1 }
+dead_code = "warn"
