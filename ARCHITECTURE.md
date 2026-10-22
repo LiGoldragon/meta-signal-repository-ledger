@@ -64,7 +64,7 @@ witness that these stay bare on the wire.
 
 ## Does Not Own
 
-- The daemon, socket listeners, actors, or sema-engine storage.
+- The daemon, socket listeners, actors, or memory-engine storage.
 - Event ingestion and the ordinary read queries.
 - Gitolite server installation, or the mirror dispatch itself.
 
