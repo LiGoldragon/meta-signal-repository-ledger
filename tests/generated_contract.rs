@@ -7,8 +7,10 @@ use signal::{ByteViewable, Restorable, Signal, Signalizable};
 
 fn registration() -> Registration {
     Registration {
-        repository_name: String::from("repository-ledger"),
-        repository_class: Class::RuntimeComponent,
+        repository_name: signal_repository_ledger::RepositoryName(signal_repository_ledger::Name(
+            String::from("repository-ledger"),
+        )),
+        repository_class: signal_repository_ledger::RepositoryClass(Class::RuntimeComponent),
     }
 }
 
@@ -26,15 +28,25 @@ fn every_configuration_operation_restores_from_fresh_peer_bytes() {
     for query in [
         Query::Register(registration()),
         Query::Retire(Retirement {
-            repository_name: String::from("repository-ledger"),
+            repository_name: meta_signal_repository_ledger::RepositoryName(
+                signal_repository_ledger::Name(String::from("repository-ledger")),
+            ),
         }),
         Query::SetSpoolDirectory(SpoolDirectoryPolicy {
-            spool_directory: String::from("/var/spool/repository-ledger"),
+            spool_directory: meta_signal_repository_ledger::SpoolDirectory(
+                signal_repository_ledger::FilesystemPath(String::from(
+                    "/var/spool/repository-ledger",
+                )),
+            ),
         }),
         Query::SetMirror(MirrorPolicy {
-            repository_name: String::from("repository-ledger"),
-            mirror_target: String::from("git@github.com:LiGoldragon/repository-ledger.git"),
-            mirror_enabled: true,
+            repository_name: meta_signal_repository_ledger::RepositoryName(
+                signal_repository_ledger::Name(String::from("repository-ledger")),
+            ),
+            mirror_target: meta_signal_repository_ledger::MirrorTarget(String::from(
+                "git@github.com:LiGoldragon/repository-ledger.git",
+            )),
+            mirror_enabled: meta_signal_repository_ledger::MirrorEnabled(true),
         }),
     ] {
         let incoming = Signal::<Query>::from(query.signalize().expect("archive").bytes().to_vec());
@@ -46,17 +58,29 @@ fn every_configuration_operation_restores_from_fresh_peer_bytes() {
 fn every_acknowledgement_restores_from_fresh_peer_bytes() {
     for response in [
         Response::Registered(Registered {
-            repository_name: String::from("repository-ledger"),
+            repository_name: meta_signal_repository_ledger::RepositoryName(
+                signal_repository_ledger::Name(String::from("repository-ledger")),
+            ),
         }),
         Response::Retired(Retired {
-            repository_name: String::from("repository-ledger"),
+            repository_name: meta_signal_repository_ledger::RepositoryName(
+                signal_repository_ledger::Name(String::from("repository-ledger")),
+            ),
         }),
         Response::SpoolDirectoryPolicySet(SpoolDirectoryPolicySet {
-            spool_directory: String::from("/var/spool/repository-ledger"),
+            spool_directory: meta_signal_repository_ledger::SpoolDirectory(
+                signal_repository_ledger::FilesystemPath(String::from(
+                    "/var/spool/repository-ledger",
+                )),
+            ),
         }),
         Response::MirrorPolicySet(MirrorPolicySet {
-            repository_name: String::from("repository-ledger"),
-            mirror_target: String::from("git@github.com:LiGoldragon/repository-ledger.git"),
+            repository_name: meta_signal_repository_ledger::RepositoryName(
+                signal_repository_ledger::Name(String::from("repository-ledger")),
+            ),
+            mirror_target: meta_signal_repository_ledger::MirrorTarget(String::from(
+                "git@github.com:LiGoldragon/repository-ledger.git",
+            )),
         }),
     ] {
         let incoming =
@@ -99,12 +123,16 @@ fn the_kind_tags_cross_the_wire_as_bare_heads() {
 #[test]
 fn a_disabled_mirror_policy_is_distinct_from_an_enabled_one() {
     let enabled = MirrorPolicy {
-        repository_name: String::from("repository-ledger"),
-        mirror_target: String::from("git@github.com:LiGoldragon/repository-ledger.git"),
-        mirror_enabled: true,
+        repository_name: meta_signal_repository_ledger::RepositoryName(
+            signal_repository_ledger::Name(String::from("repository-ledger")),
+        ),
+        mirror_target: meta_signal_repository_ledger::MirrorTarget(String::from(
+            "git@github.com:LiGoldragon/repository-ledger.git",
+        )),
+        mirror_enabled: meta_signal_repository_ledger::MirrorEnabled(true),
     };
     let mut disabled = enabled.clone();
-    disabled.mirror_enabled = false;
+    disabled.mirror_enabled = meta_signal_repository_ledger::MirrorEnabled(false);
     assert_ne!(enabled, disabled);
     let query = Query::SetMirror(disabled.clone());
     let incoming = Signal::<Query>::from(query.signalize().expect("archive").bytes().to_vec());
@@ -120,7 +148,7 @@ mod datom_text {
     fn budget() -> Budget {
         Budget {
             remaining: 65536,
-            reader: ReaderBudget { remaining: 65536 },
+            reader: ReaderBudget::try_from(65536).expect("bounded reader budget"),
             depth: 0,
             maximum_depth: 256,
         }
