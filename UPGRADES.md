@@ -1,5 +1,15 @@
 # Upgrades
 
+## 0.6.0 → 0.6.1
+
+Not breaking: the generated Rust and the public API are unchanged. The
+build-time ethos-zero is repinned from 5a5daca (19.2.0) to ccacc21 (22.0.0),
+and the redundant Signal outputs it refuses as `Payload` are written bare:
+`Registered.Registered` becomes `Registered`, and its four siblings
+likewise, carrying the same types. The build-time ethos-zero brings
+datom-codec 5cd6219 (0.33.1) into the lock beside the selected eabead4
+(0.33.0); the library's own graph is unchanged.
+
 ## 0.5.0 → 0.6.0
 
 First Datom/Protos 0.33 adoption. Authored Ethos, library, build script and

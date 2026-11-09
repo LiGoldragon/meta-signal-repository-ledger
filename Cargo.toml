@@ -1,6 +1,6 @@
 [package]
 name = "meta-signal-repository-ledger"
-version = "0.6.0"
+version = "0.6.1"
 edition = "2024"
 rust-version = "1.89"
 license = "MIT OR Apache-2.0"
@@ -25,7 +25,7 @@ signal = { git = "https://github.com/LiGoldragon/signal", rev = "7afb68b", defau
 signal-repository-ledger = { git = "https://github.com/LiGoldragon/signal-repository-ledger", rev = "9139eda", default-features = false }
 
 [build-dependencies]
-ethos-zero = { git = "https://github.com/LiGoldragon/ethos-zero", rev = "5a5daca" }
+ethos-zero = { git = "https://github.com/LiGoldragon/ethos-zero", rev = "ccacc214ba00b8448218d0b7559f037014694e41" }
 
 [lints.rust]
 unsafe_code = "forbid"

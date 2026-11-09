@@ -12,11 +12,11 @@ Signal
   Retire.Retirement
   SetSpoolDirectory.SpoolDirectoryPolicy
   SetMirror.MirrorPolicy ]
-[ Registered.Registered
-  Retired.Retired
-  SpoolDirectoryPolicySet.SpoolDirectoryPolicySet
-  MirrorPolicySet.MirrorPolicySet
-  RequestUnimplemented.RequestUnimplemented ]
+[ Registered
+  Retired
+  SpoolDirectoryPolicySet
+  MirrorPolicySet
+  RequestUnimplemented ]
 [ MirrorTarget.String
 
   OperationKind.[ Register Retire SetSpoolDirectory SetMirror ]
